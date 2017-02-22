@@ -1,0 +1,26 @@
+{
+  "name": "vlite",
+  "version": "0.0.0",
+  "description": "q vlite library",
+  "main": "vlite.q",
+  "dependencies": {
+    "bt": "C:\\dev\\btlib\\bt"
+    },
+  "devDependencies": {
+  },
+  "keywords": [
+    "q",
+    "vlite",
+    "q library"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
+
