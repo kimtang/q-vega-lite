@@ -30,14 +30,32 @@ encoding_[abs type 0nt]:"temporal" / 19h
 
 sel:sel!sel:key encoding_
 
+axisLegend_:`row`column`x`y`color`size`shape!`axis`axis`axis`axis`legend`legend`legend
+
 encoding:{[data;aes;field]
   tipe:encoding_ sel type data field;
-  title:string aes field;
-  enlist[field]!enlist `field`type`axis!(field;tipe;enlist[`title]!enlist title )
+  name:string aes field;
+  axisLegend:axisLegend_ field;
+  enlist[field]!enlist (`field`type,axisLegend)!(field;tipe;enlist[`title]!enlist name )
  }
 
+facet:{[data;facets;field]
+  tipe:encoding_ sel type data facets field;
+  name:string facets field;
+  axisLegend:axisLegend_ field;
+  enlist[field]!enlist (`field`type,axisLegend)!(facets field;tipe;enlist[`title]!enlist name )
+ }
 
 / api functions
+
+facet_grid:{[facets;obj] aes:obj`aes;data:obj`data;spec:obj`spec;
+  facets:pa0[type facets] facets;
+  allowed:allowed where (allowed:`row`column) in key facets;
+  ec:((enlist`)!(enlist{})),raze facet[data;facets;]@'allowed;
+  spec[`encoding]:spec[`encoding],ec;
+  `aes`data`spec!(aes;data;spec)
+ }
+
 
 atom:{[obj]embed:`mode`spec!("vega-lite";obj`spec);("atomEditor";embed)}
 
@@ -56,7 +74,7 @@ ylab:{[title;obj]
 
 plot:{[d;aes]
  aes:pa0[type aes] aes;
- spec:data d:?[d;();0b;aes];
+ spec:data d:![d;();0b;aes];
  `aes`data`spec!(aes;d;spec)
  }
 
