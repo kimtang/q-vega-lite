@@ -29,7 +29,7 @@ xlab:{[title;obj]
 
 ylab:{[title;obj]
  aes:obj`aes;data:obj`data;spec:obj`spec;
- spec[`encoding;`y]:spec[`encoding;`x],enlist[`axis]!enlist enlist[`title]!enlist title;
+ spec[`encoding;`y]:spec[`encoding;`y],enlist[`axis]!enlist enlist[`title]!enlist title;
  `aes`data`spec!(aes;data;spec)
  }
 

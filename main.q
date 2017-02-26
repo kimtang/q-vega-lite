@@ -9,21 +9,26 @@ data:([]a:2 1 8 7 2 4 4 6 7;b:2 1 8 7 2 4 4 6 7;c:0.2 0.1 0.8 0.7 0.2 0.4 0.4 0.
 
 r) library(ggplot2)
 diamonds:Rframe "diamonds"
+
+
 aes:"x:carat,y:price,color:cut"
 aes:`x`y`color!`carat`price`cut
 
 .vl.atom
- .vl.ylab["price"]
- .vl.xlab["carat"]
  .vl.geom_point
  .vl.plot[100?diamonds;aes]
 
 
 .vl.atom
-  .vl.ylab["price"]
-  .vl.xlab["carat"]
   .vl.geom_point
-  .vl.plot[100?diamonds;"x:carat,z:price"]
+  .vl.plot[100?diamonds;"x:carat,y:price,color:color"]
 
 
-11
+economics:Rframe "economics"
+
+
+
+
+.vl.atom
+ .vl.geom_point
+ .vl.plot[economics;"x:pce,y:unemploy"]
