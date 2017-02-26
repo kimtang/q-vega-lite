@@ -14,7 +14,27 @@ pa0[10h]:{[x]pa x}
 
 data:{[d] enlist[`data]!enlist enlist["values"]!enlist d }
 
-encoding:{[data;aes;field] tipe:(01b!("quantitative";"nominal")) max 10 11h in type data aes field;enlist[field]!enlist `field`type!(aes field;tipe ) }
+
+
+encoding_:(enlist 0nh)!enlist "quantitative"
+encoding_[abs type " "]:"nominal" / 10h
+encoding_[abs type `]:"nominal"  / 11h
+encoding_[abs type 0np]:"temporal" / 12h
+encoding_[abs type 0nm]:"temporal" / 13h
+encoding_[abs type 0nd]:"temporal" / 14h
+encoding_[abs type 0nz]:"temporal" / 15h
+encoding_[abs type 0nn]:"temporal" / 16h
+encoding_[abs type 0nu]:"temporal" / 17h
+encoding_[abs type 0nv]:"temporal" / 18h
+encoding_[abs type 0nt]:"temporal" / 19h
+
+sel:sel!sel:key encoding_
+
+encoding:{[data;aes;field]
+  tipe:encoding_ sel type data field;
+  title:string aes field;
+  enlist[field]!enlist `field`type`axis!(field;tipe;enlist[`title]!enlist title )
+ }
 
 
 / api functions
@@ -34,7 +54,9 @@ ylab:{[title;obj]
  }
 
 
-plot:{[d;aes] aes:pa0[type aes] aes;spec:data d;
+plot:{[d;aes]
+ aes:pa0[type aes] aes;
+ spec:data d:?[d;();0b;aes];
  `aes`data`spec!(aes;d;spec)
  }
 
