@@ -4,8 +4,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch:{
-      main:{files:['main.q','vlite.q'],tasks:['shell:stopMain','shell:startMain','shell:log'],options:{atBegin:true,interrupt:true}},
-      test:{files:['test/test.q','vlite.q'],tasks:['shell:stopTest','shell:startTest','shell:log'],options:{atBegin:true,interrupt:true}}
+      main:{files:['main.q','vlite.q'],tasks:['shell:stopMain','shell:reloadMain','shell:log'],options:{atBegin:true,interrupt:true}},
+      test:{files:['test/test.q','vlite.q'],tasks:['shell:stopTest','shell:reloadTest','shell:log'],options:{atBegin:true,interrupt:true}}
 
     },
     shell:{
@@ -20,11 +20,13 @@ module.exports = function(grunt) {
       startMain:{ command:"pm2 start pm2.yaml --only main"},
       stopMain:{  command:"pm2 stop pm2.yaml --only main"},
       restartMain:{ command:"pm2 restart pm2.yaml --only main"},
+      reloadMain:{ command:"pm2 reload pm2.yaml --only main"},
       consoleMain:{ command:"pm2 log pm2.yaml --only main"},
 
       startTest:{ command:"pm2 start pm2.yaml --only test"},
       stopTest:{  command:"pm2 stop pm2.yaml --only test"},
       restartTest:{ command:"pm2 restart pm2.yaml --only test"},
+      reloadTest:{ command:"pm2 reload pm2.yaml --only test"},
       consoleTest:{ command:"pm2 log pm2.yaml --only test"}
 
     },
@@ -44,6 +46,7 @@ module.exports = function(grunt) {
   grunt.registerTask('startAll', ['shell:startAll']);
   grunt.registerTask('stopAll', ['shell:stopAll']);
   grunt.registerTask('restartAll', ['shell:restartAll']);
+  grunt.registerTask('reloadAll', ['shell:reloadAll']);
 
   grunt.registerTask('startMain', ['shell:startMain']);
   grunt.registerTask('stopMain', ['shell:stopMain']);

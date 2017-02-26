@@ -3,9 +3,9 @@ apps:
   - script   : ./main.q
     name     : 'main'
     interpreter: q
-    interpreter_args: main.q -p 14010
+    interpreter_args: main.q -p 14010 -q
 
   - script : ./test/test.q
     name   : 'test'
     interpreter: q
-    interpreter_args: test/test.q -p 16010
+    interpreter_args: test/test.q -p 16010 -q
